@@ -68,6 +68,7 @@ function App(){
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={<BookList data={data} loaded={loaded} />}/>
+          <Route path="/:bookId" element={<Book books={data} loaded={loaded} />} />
         </Routes>
       </div>
     </Router> 
