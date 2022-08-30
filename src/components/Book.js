@@ -1,16 +1,21 @@
 import { Link, useParams } from "react-router-dom";
-function data({data, books, loaded}){
+function data({data, loaded}){
     // for this to work, we would have to be able to fetch the specific book
     // eslint-disable-next-line react-hooks/rules-of-hooks
     let params = useParams();
+    // This is how you would actually fetch a book from your server instead of the data.json file
     // let book = useFakeFetch(`/api/books/${isbn}`);
-    // let book = books.filter(book => book.isbn === params.isbn);
-    console.log(params.bookId)
-    console.log(books)
-  return (
-      <div className="card">
-      <h5 className="card-header">{data.title}</h5>
-      {/* <h1> ISBN from useParams: {params.isbn} </h1> */}
+   
+    console.log("Params bookId" + params.bookId)
+    
+    const myRender = () => {
+        if(loaded){
+            console.log(data.books)
+            let book = data.books.filter(book => book.isbn == params.bookId);
+            console.log('Book' + book);
+            return (
+                       <div className="card">
+      <h5 className="card-header">{book.title}</h5>
       <div className="card-body">
       <h5>{data.subtitle}</h5>
 
@@ -40,38 +45,20 @@ function data({data, books, loaded}){
           </table>
 
       </div>
-  </div>)
+  </div>
+                
+            )
+          } else{
+            return <h1>Loading</h1>
+          }
+    }
+  return (
+      <div>
+        {myRender()}
 
-    
+      </div>
+   
+  );
 }
+
 export default data;
-
-
-// Create a class for the element
-// Since we inhert from HTMLNode we can add eventlisters, get all attributes of our element
-      // Review the properties of an HTML element to see all of the props and methods we get
-      //https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
-      // Learn more about Web Components here
-      // https://javascript.works-hub.com/learn/web-components-api-lifecycle-events-and-custom-events-66668
-
-
-// class Book extends HTMLElement {
-//   constructor() {
-//       super();
-//   }
-// // invoked everytime a web component is connected to the DOM
-//   connectedCallback() {
-//       const title    = this.getAttribute('title');
-//       const subtitle = this.getAttribute('subtitle');
-    //   const author   = this.getAttribute('author');
-    //   const publisher = this.getAttribute('publisher');
-    //   const description = this.getAttribute('description');
-      
-//       this.addEventListener('click', ()=> alert(`${title} Clicked!`))
-//       // const getNamedItem = this.attributes.getNamedItem('title')
-  
-//   }
-// }
-
-// // // Define the new element
-// customElements.define('mit-data', data);

@@ -45,14 +45,6 @@ function App(){
   },[])
   console.log('loaded:', loaded, 'data:', data);
 
-  // Todo: Convert Web Component into a React Functional Component
-  // <mit-book 
-  //         title={book.title} 
-  //         subtitle={book.subtitle} 
-  //         author={book.author} 
-  //         publisher={book.publisher}
-  //         description={book.description} 
-  //         key={book.isbn} />
   return(
     <Router>
       <div>
@@ -68,7 +60,7 @@ function App(){
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={<BookList data={data} loaded={loaded} />}/>
-          <Route path="/:bookId" element={<Book books={data} loaded={loaded} />} />
+          <Route path="/:bookId" element={<Book data={data} loaded={loaded} />} />
         </Routes>
       </div>
     </Router> 
